@@ -38,11 +38,11 @@ void setup() {
 
 void loop() {
     buttonState = digitalRead(buttonPin);
-    Spark.publish("notifyr/debug", itoa(changeShift,buf,10));
     if(buttonState==HIGH){
         changeShift = currentShift ^ arrShift[thisThing];
         digitalWrite(latchPin, LOW);
         shiftOut(dataPin, clockPin, MSBFIRST, changeShift);
+        Spark.publish("stickerchart", itoa(changeShift,buf,10));
         digitalWrite(latchPin, HIGH);
         currentShift = changeShift;
     }
