@@ -7,7 +7,7 @@
 		<script type="text/javascript" charset="utf-8">
 			var source = new EventSource('https://api.particle.io/v1/events?access_token=09bdf9cdbde40ee34a6d792706e99cbd3c46692f');
 			source.addEventListener('stickerchart',function(e) {
-				document.body.innerHTML += dec2bin(e.data); + '<br>';
+				document.body.innerHTML = dec2bin(JSON.parse(e.data)['data']);
 			});
 
 			function dec2bin(dec){
