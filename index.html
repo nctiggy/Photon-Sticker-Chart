@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="utf-8" />
+		<meta charset="utf-8" />
+		<style type="text/css" media="all">
+			.circle {
+				border-radius: 50%;
+				width: 150px;
+				height: 150px;
+			}
+		</style>
 	</head>
 	<body>
+		<table>
+			<tr>
+				<th>Before School</th>
+				<th>At School</th>
+				<th>After School</th>
+				<th>Diner Time</th>
+				<th>Bath Time</th>
+			</tr>
+			<tr>
+				<td><div id="before" class="circle" onclick="#"></div></td>
+				<td><div id="at" class="circle"></div></td>
+				<td><div id="after" class="circle"></div></td>
+				<td><div id="diner" class="circle"></div></td>
+				<td><div id="bath" class="circle"></div></td>
+			</tr>
+		</table>
+
+
 		<script type="text/javascript" charset="utf-8">
+			var times = ["before","at","after","diner","bath"];
+			var stickers = ["c3po.jpg","hansolo.jpg","lukeskywalker.jpg","r2d2.jpg","darthvader.jpg"]
 			var source = new EventSource('https://api.particle.io/v1/events?access_token=09bdf9cdbde40ee34a6d792706e99cbd3c46692f');
 			source.addEventListener('stickerchart',function(e) {
-				document.body.innerHTML = dec2bin(JSON.parse(e.data)['data']);
+				arrStickers = dec2bin(JSON.parse(e.data)['data']).split('');
+				updateChart(checkBinary(arrStickers));
 			});
+
+			function updateChart(arrBinary) {
+				for (i=0; i < times.length; i++) {
+					var sticker = document.getElementById(times[i]);
+					if (arrBinary[i] == 0) {
+						sticker.style.background="grey none";
+					} else {
+						sticker.style.background="grey url(" + 'images/'.concat(stickers[i]) + ") center";
+					}
+				}
+			}
+
+			function checkBinary(arrBinary) {
+				while (arrBinary.length < 8) {
+					arrBinary.unshift(0);
+				}
+				return arrBinary;
+			}
 
 			function dec2bin(dec){
 				return (dec >>> 0).toString(2);
