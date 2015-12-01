@@ -7,11 +7,25 @@
 				border-radius: 50%;
 				width: 150px;
 				height: 150px;
+				text-align: center;
+			}
+			.main {
+				width: 75%;
+				margin: 0 auto;
+				background: #e6e6e6;
+			}
+			td {
+				background: red;
+				width: 150px;
 			}
 		</style>
 	</head>
 	<body>
-		<table>
+		<div class="header">
+			Header
+		</div>
+		<div class="main">
+		<table class="chart">
 			<tr>
 				<th>Before School</th>
 				<th>At School</th>
@@ -27,7 +41,10 @@
 				<td><div id="bath" class="circle"></div></td>
 			</tr>
 		</table>
-
+		</div>
+		<div class="footer">
+			Footer
+		</div>
 
 		<script type="text/javascript" charset="utf-8">
 			var times = ["before","at","after","diner","bath"];
